@@ -1,0 +1,316 @@
+@import 'tailwindcss';
+
+/* ============================================================================
+   DESIGN TOKENS
+   Brand colours are sampled directly from the supplied logo:
+     green  #00A860  ->  teal  #0E8573   (the loop gradient)
+     navy   #182030                        (the wordmark)
+   The logo bitmap has a pure-white background, so it is only ever placed on
+   pure-white surfaces. Every other background is a near-white tint.
+   ========================================================================= */
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Fraunces', ui-serif, Georgia, 'Times New Roman', serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Ink */
+  --color-ink: #182030;
+  --color-ink-soft: #4a5468;
+  --color-ink-mute: #646d80;
+
+  /* Lines */
+  --color-line: #e8ebf1;
+  --color-line-strong: #d3d9e3;
+
+  /* Surfaces — never pure white except --color-paper, so the logo blends */
+  --color-paper: #ffffff;
+  --color-mist: #f7f8fa;
+  --color-fog: #eef2f7;
+
+  /* Brand */
+  --color-brand: #00a860;
+  --color-brand-deep: #007a47;
+  --color-brand-ink: #00613a;
+  --color-teal: #0e9b84;
+  --color-teal-deep: #0b7a69;
+  --color-blue: #2563eb;
+  --color-purple: #6d28d9;
+
+  /* Functional status colour for exceptions — an allowed brand extension. */
+  --color-amber: #f59e0b;
+  --color-amber-deep: #b45309;
+
+  /* Dark surfaces */
+  --color-navy: #111a2b;
+  --color-navy-deep: #0a101c;
+
+  /* Fluid type scale */
+  --text-display: clamp(2.25rem, 5.8vw, 5rem);
+  --text-display--line-height: 1.03;
+  --text-display--letter-spacing: -0.028em;
+
+  --text-headline: clamp(1.9rem, 3.9vw, 3rem);
+  --text-headline--line-height: 1.1;
+  --text-headline--letter-spacing: -0.022em;
+
+  --text-title: clamp(1.35rem, 2.1vw, 1.75rem);
+  --text-title--line-height: 1.25;
+  --text-title--letter-spacing: -0.015em;
+
+  --text-lead: clamp(1.0625rem, 1.25vw, 1.25rem);
+  --text-lead--line-height: 1.6;
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================================================
+   BASE
+   ========================================================================= */
+@layer base {
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  /* Single, consistent focus treatment across the whole site. */
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+    border-radius: 3px;
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-brand) 20%, transparent);
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--color-brand) 26%, transparent);
+    color: var(--color-ink);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+/* ============================================================================
+   COMPONENTS
+   ========================================================================= */
+@layer components {
+  /* Consistent page gutter + measure. */
+  .shell {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 78rem;
+    padding-inline: clamp(1.25rem, 4.5vw, 3.5rem);
+  }
+
+  .shell-narrow {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 60rem;
+    padding-inline: clamp(1.25rem, 4.5vw, 3.5rem);
+  }
+
+  /* Fraunces, tuned: no wonky alternates, crisp terminals, optical sizing on. */
+  .display {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-variation-settings:
+      'SOFT' 0,
+      'WONK' 0;
+    font-weight: 400;
+    letter-spacing: -0.022em;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .tnum {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+  }
+
+  /* Signature gradient hairline — the brand's green→teal→blue→purple run. */
+  .brand-rule {
+    height: 1px;
+    border: 0;
+    background: linear-gradient(
+      90deg,
+      var(--color-brand) 0%,
+      var(--color-teal) 32%,
+      var(--color-blue) 66%,
+      var(--color-purple) 100%
+    );
+    opacity: 0.75;
+  }
+
+  /* Print-style registration marks on the four corners of a card. */
+  .crop-marks {
+    position: relative;
+  }
+  .crop-marks::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    pointer-events: none;
+    color: var(--color-line-strong);
+    opacity: 0;
+    transition: opacity 0.4s var(--ease-out-expo);
+    background:
+      linear-gradient(currentColor, currentColor) left 0 top 0 / 11px 1px no-repeat,
+      linear-gradient(currentColor, currentColor) left 0 top 0 / 1px 11px no-repeat,
+      linear-gradient(currentColor, currentColor) right 0 top 0 / 11px 1px no-repeat,
+      linear-gradient(currentColor, currentColor) right 0 top 0 / 1px 11px no-repeat,
+      linear-gradient(currentColor, currentColor) left 0 bottom 0 / 11px 1px no-repeat,
+      linear-gradient(currentColor, currentColor) left 0 bottom 0 / 1px 11px no-repeat,
+      linear-gradient(currentColor, currentColor) right 0 bottom 0 / 11px 1px no-repeat,
+      linear-gradient(currentColor, currentColor) right 0 bottom 0 / 1px 11px no-repeat;
+  }
+  .crop-marks:hover::before,
+  .crop-marks:focus-within::before {
+    opacity: 1;
+  }
+
+  /* Faint ruled-paper texture, borrowed from working papers. */
+  .ruled {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 31px,
+      color-mix(in srgb, var(--color-ink) 5%, transparent) 31px,
+      color-mix(in srgb, var(--color-ink) 5%, transparent) 32px
+    );
+  }
+
+  /* Film grain, used only on dark surfaces to stop flat colour looking cheap. */
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Underline that draws in from the left on hover. */
+  .draw-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    transition: background-size 0.45s var(--ease-out-expo);
+  }
+  .draw-underline:hover,
+  .draw-underline:focus-visible {
+    background-size: 100% 1px;
+  }
+}
+
+/* The skip link's target: focusable so it can receive focus, but never drawn. */
+#main:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Progress rail inside the hero pipeline. */
+@keyframes bar-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Visually hidden until focused — used by the skip link. */
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 50%;
+  z-index: 100;
+  transform: translate(-50%, -200%);
+  border-radius: 999px;
+  background: var(--color-ink);
+  color: #fff;
+  padding: 0.65rem 1.15rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: transform 0.28s var(--ease-out-expo);
+}
+.skip-link:focus {
+  transform: translate(-50%, 0);
+}
+
+/* ============================================================================
+   SCROLL REVEAL
+   .reveal is applied by JS only when IntersectionObserver is available, so
+   content is never stranded hidden by a failed animation.
+   ========================================================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.75s var(--ease-out-expo),
+    transform 0.75s var(--ease-out-expo);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.is-visible {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

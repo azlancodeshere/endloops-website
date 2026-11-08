@@ -6,7 +6,6 @@ const base =
   'ease-[cubic-bezier(0.16,1,0.3,1)] disabled:pointer-events-none disabled:opacity-60'
 
 const variants = {
-  /* Solid brand green — AA contrast against white text (5.4:1). */
   primary:
     'bg-brand-deep text-white px-6 py-3 text-[0.95rem] hover:bg-brand-ink ' +
     'hover:-translate-y-px shadow-[0_1px_2px_rgba(24,32,48,0.16)] ' +
@@ -46,10 +45,6 @@ function Arrow({ className = '' }) {
   )
 }
 
-/**
- * One button for three destinations: `to` (internal route), `href` (external),
- * or a plain submit/reset button. Keeps markup consistent across the site.
- */
 export default function Button({
   variant = 'primary',
   to,

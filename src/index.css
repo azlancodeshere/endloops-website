@@ -1,33 +1,21 @@
 @import 'tailwindcss';
 
-/* ============================================================================
-   DESIGN TOKENS
-   Brand colours are sampled directly from the supplied logo:
-     green  #00A860  ->  teal  #0E8573   (the loop gradient)
-     navy   #182030                        (the wordmark)
-   The logo bitmap has a pure-white background, so it is only ever placed on
-   pure-white surfaces. Every other background is a near-white tint.
-   ========================================================================= */
 @theme {
   --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-display: 'Fraunces', ui-serif, Georgia, 'Times New Roman', serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  /* Ink */
   --color-ink: #182030;
   --color-ink-soft: #4a5468;
   --color-ink-mute: #646d80;
 
-  /* Lines */
   --color-line: #e8ebf1;
   --color-line-strong: #d3d9e3;
 
-  /* Surfaces — never pure white except --color-paper, so the logo blends */
   --color-paper: #ffffff;
   --color-mist: #f7f8fa;
   --color-fog: #eef2f7;
 
-  /* Brand */
   --color-brand: #00a860;
   --color-brand-deep: #007a47;
   --color-brand-ink: #00613a;
@@ -36,15 +24,12 @@
   --color-blue: #2563eb;
   --color-purple: #6d28d9;
 
-  /* Functional status colour for exceptions — an allowed brand extension. */
   --color-amber: #f59e0b;
   --color-amber-deep: #b45309;
 
-  /* Dark surfaces */
   --color-navy: #111a2b;
   --color-navy-deep: #0a101c;
 
-  /* Fluid type scale */
   --text-display: clamp(2.25rem, 5.8vw, 5rem);
   --text-display--line-height: 1.03;
   --text-display--letter-spacing: -0.028em;
@@ -60,13 +45,9 @@
   --text-lead: clamp(1.0625rem, 1.25vw, 1.25rem);
   --text-lead--line-height: 1.6;
 
-  /* Motion */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ============================================================================
-   BASE
-   ========================================================================= */
 @layer base {
   @media (prefers-reduced-motion: no-preference) {
     html {
@@ -89,7 +70,6 @@
     overflow-x: hidden;
   }
 
-  /* Single, consistent focus treatment across the whole site. */
   :focus-visible {
     outline: 2px solid var(--color-brand);
     outline-offset: 2px;
@@ -114,11 +94,7 @@
   }
 }
 
-/* ============================================================================
-   COMPONENTS
-   ========================================================================= */
 @layer components {
-  /* Consistent page gutter + measure. */
   .shell {
     margin-inline: auto;
     width: 100%;
@@ -133,7 +109,6 @@
     padding-inline: clamp(1.25rem, 4.5vw, 3.5rem);
   }
 
-  /* Fraunces, tuned: no wonky alternates, crisp terminals, optical sizing on. */
   .display {
     font-family: var(--font-display);
     font-optical-sizing: auto;
@@ -142,6 +117,14 @@
       'WONK' 0;
     font-weight: 400;
     letter-spacing: -0.022em;
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-variation-settings:
+      'SOFT' 0,
+      'WONK' 0;
   }
 
   .eyebrow {
@@ -158,7 +141,6 @@
     font-feature-settings: 'tnum' 1;
   }
 
-  /* Signature gradient hairline — the brand's green→teal→blue→purple run. */
   .brand-rule {
     height: 1px;
     border: 0;
@@ -172,7 +154,6 @@
     opacity: 0.75;
   }
 
-  /* Print-style registration marks on the four corners of a card. */
   .crop-marks {
     position: relative;
   }
@@ -199,7 +180,6 @@
     opacity: 1;
   }
 
-  /* Faint ruled-paper texture, borrowed from working papers. */
   .ruled {
     background-image: repeating-linear-gradient(
       to bottom,
@@ -210,7 +190,6 @@
     );
   }
 
-  /* Film grain, used only on dark surfaces to stop flat colour looking cheap. */
   .grain::after {
     content: '';
     position: absolute;
@@ -221,7 +200,6 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  /* Underline that draws in from the left on hover. */
   .draw-underline {
     background-image: linear-gradient(currentColor, currentColor);
     background-position: 0 100%;
@@ -235,13 +213,11 @@
   }
 }
 
-/* The skip link's target: focusable so it can receive focus, but never drawn. */
 #main:focus {
   outline: none;
   box-shadow: none;
 }
 
-/* Progress rail inside the hero pipeline. */
 @keyframes bar-fill {
   from {
     transform: scaleX(0);
@@ -262,7 +238,6 @@
   }
 }
 
-/* Visually hidden until focused — used by the skip link. */
 .skip-link {
   position: fixed;
   top: 0.75rem;
@@ -281,11 +256,6 @@
   transform: translate(-50%, 0);
 }
 
-/* ============================================================================
-   SCROLL REVEAL
-   .reveal is applied by JS only when IntersectionObserver is available, so
-   content is never stranded hidden by a failed animation.
-   ========================================================================= */
 .reveal {
   opacity: 0;
   transform: translateY(20px);

@@ -1,10 +1,3 @@
-/**
- * Accessibility + console audit.
- * Runs axe-core across all routes at desktop (1440px) and mobile (390px),
- * and fails if any axe violations or console errors are found.
- *
- *   node scripts/a11y-audit.mjs [baseUrl]
- */
 import puppeteer from 'puppeteer-core'
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'

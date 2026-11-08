@@ -1,9 +1,3 @@
-/**
- * Interaction smoke tests: tabs, FAQ accordion, form validation,
- * mobile menu, ScrollToTop, and hash navigation.
- *
- *   node scripts/interactions.mjs [baseUrl]
- */
 import puppeteer from 'puppeteer-core'
 
 const BASE = process.argv[2] || 'http://localhost:4173'
@@ -25,7 +19,6 @@ const check = (name, ok, detail = '') => {
 const page = await browser.newPage()
 await page.setViewport({ width: 1440, height: 900 })
 
-// ── Home: product tabs ──────────────────────────────────────────────
 await page.goto(`${BASE}/`, { waitUntil: 'networkidle0' })
 const tabs = await page.$$('[role="tab"]')
 check('tabs: 2 tabs rendered', tabs.length === 2, `got ${tabs.length}`)
@@ -37,37 +30,9 @@ if (tabs.length === 2) {
   check('tabs: panel has content', panel)
 }
 
-// ── Home: pipeline has pause control ────────────────────────────────
 const pauseBtn = await page.$('button[aria-label*="pause" i], button[aria-label*="Pause"]')
 check('pipeline: pause control present', Boolean(pauseBtn))
 
-// ── Contact: FAQ accordion ──────────────────────────────────────────
-await page.goto(`${BASE}/contact`, { waitUntil: 'networkidle0' })
-const faqBtn = await page.$('#faq-0-btn')
-check('faq: first button rendered', Boolean(faqBtn))
-if (faqBtn) {
-  const before = await page.$eval('#faq-0-panel', (el) => el.getBoundingClientRect().height)
-  await faqBtn.click()
-  await new Promise((r) => setTimeout(r, 500))
-  const after = await page.$eval('#faq-0-panel', (el) => el.getBoundingClientRect().height)
-  const expanded = await page.$eval('#faq-0-btn', (el) => el.getAttribute('aria-expanded'))
-  check('faq: click expands answer', after > before, `${before} -> ${after}`)
-  check('faq: aria-expanded flips to true', expanded === 'true')
-}
-
-// ── Contact: form validation ────────────────────────────────────────
-const submit = await page.$('form button[type="submit"]')
-check('form: submit button present', Boolean(submit))
-if (submit) {
-  await submit.click()
-  await new Promise((r) => setTimeout(r, 300))
-  const invalid = await page.$$('[aria-invalid="true"]')
-  check('form: empty submit flags fields', invalid.length >= 3, `${invalid.length} fields`)
-  const focused = await page.evaluate(() => document.activeElement?.getAttribute('aria-invalid'))
-  check('form: focus moves to first invalid', focused === 'true')
-}
-
-// ── Tools: walkthrough step switching ───────────────────────────────
 await page.goto(`${BASE}/tools`, { waitUntil: 'networkidle0' })
 const walkOl = await page.$$('section ol button')
 if (walkOl.length >= 4) {
@@ -84,7 +49,30 @@ if (walkOl.length >= 4) {
   check('walkthrough: step buttons rendered', false, `got ${walkOl.length}`)
 }
 
-// ── Mobile: menu opens/closes, Escape works ─────────────────────────
+await page.goto(`${BASE}/contact`, { waitUntil: 'networkidle0' })
+const faqBtn = await page.$('#faq-0-btn')
+check('faq: first button rendered', Boolean(faqBtn))
+if (faqBtn) {
+  const before = await page.$eval('#faq-0-panel', (el) => el.getBoundingClientRect().height)
+  await faqBtn.click()
+  await new Promise((r) => setTimeout(r, 500))
+  const after = await page.$eval('#faq-0-panel', (el) => el.getBoundingClientRect().height)
+  const expanded = await page.$eval('#faq-0-btn', (el) => el.getAttribute('aria-expanded'))
+  check('faq: click expands answer', after > before, `${before} -> ${after}`)
+  check('faq: aria-expanded flips to true', expanded === 'true')
+}
+
+const submit = await page.$('form button[type="submit"]')
+check('form: submit button present', Boolean(submit))
+if (submit) {
+  await submit.click()
+  await new Promise((r) => setTimeout(r, 300))
+  const invalid = await page.$$('[aria-invalid="true"]')
+  check('form: empty submit flags fields', invalid.length >= 3, `${invalid.length} fields`)
+  const focused = await page.evaluate(() => document.activeElement?.getAttribute('aria-invalid'))
+  check('form: focus moves to first invalid', focused === 'true')
+}
+
 await page.setViewport({ width: 390, height: 844 })
 await page.goto(`${BASE}/`, { waitUntil: 'networkidle0' })
 const burger = await page.$('button[aria-controls="mobile-menu"]')
@@ -102,7 +90,6 @@ if (burger) {
   check('menu: Escape closes', !open)
 }
 
-// ── ScrollToTop button ──────────────────────────────────────────────
 const stVisibleBefore = await page.evaluate(() => {
   const btn = document.querySelector('button[aria-label="Back to top"]')
   if (!btn) return null
@@ -128,7 +115,6 @@ if (stState && Number(stState.opacity) > 0.9) {
 }
 check('scroll-to-top: hidden at top initially', stVisibleBefore === '0' || stVisibleBefore === null)
 
-// ── Hash navigation (/solutions#budget-review) ─────────────────────
 await page.setViewport({ width: 1440, height: 900 })
 await page.goto(`${BASE}/solutions#budget-review`, { waitUntil: 'networkidle0' })
 await new Promise((r) => setTimeout(r, 900))
@@ -140,7 +126,6 @@ const hashOk = await page.evaluate(() => {
 })
 check('hash: /solutions#budget-review scrolls to section', hashOk)
 
-// ── Logo renders (no broken image) ─────────────────────────────────
 await page.goto(`${BASE}/`, { waitUntil: 'networkidle0' })
 const logo = await page.evaluate(() => {
   const img = document.querySelector('header img')
@@ -148,7 +133,6 @@ const logo = await page.evaluate(() => {
 })
 check('logo: loads with natural width', logo && logo.complete && logo.w > 0, JSON.stringify(logo))
 
-// ── Single h1 per page ──────────────────────────────────────────────
 for (const route of ['/', '/solutions', '/tools', '/about', '/contact', '/nope']) {
   await page.goto(BASE + route, { waitUntil: 'networkidle0' })
   const h1 = await page.$$eval('h1', (els) => els.length)

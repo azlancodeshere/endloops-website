@@ -43,7 +43,6 @@ export default function Footer() {
               {SITE.originLine}
             </p>
 
-            {/* Contact pill */}
             <a
               href={`mailto:${SITE.email}`}
               className="mt-6 inline-flex items-center gap-2 rounded-full border border-line-strong bg-mist px-4 py-2 text-[0.88rem] text-ink-soft transition-colors hover:border-brand/40 hover:text-brand-deep"

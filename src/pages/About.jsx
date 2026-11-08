@@ -36,7 +36,6 @@ export default function About() {
         intro="Endloops did not start as a product idea. It started as a department doing the work — building software to automate the financial tasks that Alkazim's own teams performed for clients, every day, under deadline."
       />
 
-      {/* Origin story */}
       <section className="bg-white py-16 md:py-24">
         <div className="shell">
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
@@ -78,8 +77,8 @@ export default function About() {
                 <figure className="rounded-2xl border border-line bg-mist p-8 md:p-10">
                   <span aria-hidden="true" className="block h-10 w-px bg-linear-to-b from-brand to-teal" />
                   <blockquote className="display mt-7 text-[1.45rem] leading-snug text-ink md:text-[1.65rem]">
-                    “The software prepares the work. The professional reviews and
-                    decides.”
+                    "The software prepares the work. The professional reviews and
+                    decides."
                   </blockquote>
                   <figcaption className="mt-6 text-[0.92rem] leading-relaxed text-ink-mute">
                     The principle every Endloops product is built around — and
@@ -92,7 +91,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* Principles */}
       <section className="border-t border-line bg-mist py-20 md:py-28">
         <div className="shell">
           <SectionHeading
@@ -125,7 +123,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* Direction */}
       <section className="border-t border-line bg-white py-20 md:py-28">
         <div className="shell">
           <SectionHeading
@@ -156,7 +153,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* Growing capabilities */}
       <section className="border-t border-line bg-mist py-20 md:py-28">
         <div className="shell">
           <SectionHeading

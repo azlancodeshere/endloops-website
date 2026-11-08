@@ -49,7 +49,6 @@ export default function Solutions() {
         </div>
       </PageHero>
 
-      {/* The products */}
       <section className="bg-white py-16 md:py-24">
         <div className="shell">
           <ul className="border-t border-line">
@@ -58,7 +57,7 @@ export default function Solutions() {
                 as="li"
                 key={item.id}
                 id={item.id}
-                className="scroll-mt-28 border-b border-line py-12 md:py-16"
+                className="scroll-mt-28 border-b border-line py-12 transition-colors duration-300 hover:border-brand/20 md:py-16"
               >
                 <div className="grid gap-8 md:grid-cols-12 md:gap-10">
                   <div className="md:col-span-4">
@@ -73,13 +72,14 @@ export default function Solutions() {
 
                   <div className="md:col-span-8">
                     <p className="text-lead text-ink">{item.summary}</p>
-                    <p className="mt-5 text-[1rem] leading-relaxed text-ink-soft">
-                      {item.detail}
-                    </p>
+                    <p className="mt-5 text-[1rem] leading-relaxed text-ink-soft">{item.detail}</p>
 
                     <ul className="mt-8 grid gap-x-8 gap-y-3 sm:grid-cols-2">
                       {item.points.map((p) => (
-                        <li key={p} className="flex items-start gap-2.5 text-[0.93rem] leading-relaxed text-ink-soft">
+                        <li
+                          key={p}
+                          className="flex items-start gap-2.5 text-[0.93rem] leading-relaxed text-ink-soft"
+                        >
                           <span
                             aria-hidden="true"
                             className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand"
@@ -96,7 +96,6 @@ export default function Solutions() {
         </div>
       </section>
 
-      {/* What they share */}
       <section className="border-t border-line bg-mist py-20 md:py-28">
         <div className="shell">
           <SectionHeading
@@ -117,12 +116,8 @@ export default function Solutions() {
                 <span className="tnum eyebrow text-brand-deep">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <h3 className="mt-4 text-[1.02rem] font-medium leading-snug text-ink">
-                  {item.t}
-                </h3>
-                <p className="mt-3 text-[0.93rem] leading-relaxed text-ink-soft">
-                  {item.b}
-                </p>
+                <h3 className="mt-4 text-[1.02rem] font-medium leading-snug text-ink">{item.t}</h3>
+                <p className="mt-3 text-[0.93rem] leading-relaxed text-ink-soft">{item.b}</p>
               </Reveal>
             ))}
           </ul>

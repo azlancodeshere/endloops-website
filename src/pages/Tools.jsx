@@ -46,7 +46,6 @@ export default function Tools() {
         </div>
       </PageHero>
 
-      {/* The walkthrough */}
       <section className="bg-white py-16 md:py-24">
         <div className="shell">
           <SectionHeading
@@ -67,7 +66,6 @@ export default function Tools() {
         </div>
       </section>
 
-      {/* All tools */}
       <section className="border-t border-line bg-mist py-20 md:py-28">
         <div className="shell">
           <SectionHeading
@@ -84,7 +82,7 @@ export default function Tools() {
                 key={item.id}
                 id={item.id}
                 delay={(i % 3) * 80}
-                className="crop-marks scroll-mt-28 flex flex-col rounded-xl border border-line bg-white p-7 transition-shadow duration-300 hover:shadow-[0_24px_50px_-38px_rgba(24,32,48,0.6)]"
+                className="crop-marks scroll-mt-28 flex flex-col rounded-xl border border-line bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-[0_24px_50px_-32px_rgba(0,168,96,0.35)]"
               >
                 <span className="tnum eyebrow text-purple">
                   {String(i + 1).padStart(2, '0')} · Tool
@@ -120,7 +118,6 @@ export default function Tools() {
         </div>
       </section>
 
-      {/* Plug-in note */}
       <section className="border-t border-line bg-white py-20 md:py-28">
         <div className="shell">
           <SectionHeading

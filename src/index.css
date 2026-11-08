@@ -180,16 +180,6 @@
     opacity: 1;
   }
 
-  .ruled {
-    background-image: repeating-linear-gradient(
-      to bottom,
-      transparent 0,
-      transparent 31px,
-      color-mix(in srgb, var(--color-ink) 5%, transparent) 31px,
-      color-mix(in srgb, var(--color-ink) 5%, transparent) 32px
-    );
-  }
-
   .grain::after {
     content: '';
     position: absolute;

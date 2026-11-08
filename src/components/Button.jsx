@@ -84,5 +84,3 @@ export default function Button({
     </button>
   )
 }
-
-export { Arrow }

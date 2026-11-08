@@ -84,7 +84,10 @@ exists *and* motion is permitted, so content can never be stranded at `opacity: 
 
 ## Accessibility
 
-- axe-core: **0 violations across all 6 routes at both 1440px and 390px**
+- axe-core: **0 violations across all 6 routes at both 1440px and 390px** — re-verified by
+  `npm run test:a11y` (starts `npm run preview` first), which also fails on console errors
+- Interaction smoke tests (tabs, FAQ, form, mobile menu, scroll-to-top, hash links, logo,
+  one `h1` per page): `npm run test:interactions`
 - Visible skip link, single `<h1>` per page, correct landmark structure
 - Tabs implement the ARIA tabs pattern with roving `tabindex` and arrow-key activation
 - Mobile menu: `aria-expanded`/`aria-controls`, Escape to close, body scroll locked

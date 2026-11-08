@@ -15,7 +15,7 @@ export default function ProcessLoop() {
               <span
                 className={`flex h-[27px] w-[27px] items-center justify-center rounded-full border-2 text-[0.62rem] font-semibold tnum ${
                   step.who === 'software'
-                    ? 'border-brand bg-brand text-white'
+                    ? 'border-brand-deep bg-brand-deep text-white'
                     : 'border-purple bg-white text-purple'
                 }`}
               >
@@ -39,7 +39,7 @@ export default function ProcessLoop() {
                 aria-hidden="true"
                 className={`flex h-[27px] w-[27px] items-center justify-center rounded-full border-2 text-[0.62rem] font-semibold tnum md:hidden ${
                   step.who === 'software'
-                    ? 'border-brand bg-brand text-white'
+                    ? 'border-brand-deep bg-brand-deep text-white'
                     : 'border-purple bg-white text-purple'
                 }`}
               >

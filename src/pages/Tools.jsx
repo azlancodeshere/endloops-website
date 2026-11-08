@@ -38,7 +38,7 @@ export default function Tools() {
         <div className="flex flex-wrap gap-x-8 gap-y-3">
           {['Extraction', 'Vouching', 'Expenses', 'Report review', 'Tenders', 'Reconciliation'].map(
             (n) => (
-              <span key={n} className="text-[0.9rem] text-ink-mute">
+              <span key={n} className="text-[0.9rem] text-ink-soft">
                 {n}
               </span>
             ),

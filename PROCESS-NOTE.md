@@ -24,9 +24,9 @@ invisible.
 
 ## Verification
 
-Rather than trusting my eye, I audited the result: axe-core returned zero violations across
-six routes at 1440px and 390px; 45 scripted assertions covered the tabs, walkthrough,
-mobile menu and form validation; the console was clean. Two bugs surfaced — a cascade
+Rather than trusting my eye, I audited the result: axe-core returns zero violations across
+six routes at 1440px and 390px, and 27 scripted checks cover the tabs, walkthrough, FAQ,
+form, menu and scroll-to-top — both committed as npm scripts. Two bugs surfaced — a cascade
 conflict in the mobile header, and a grey failing AA contrast — both fixed.
 
 ## What I would improve with more time

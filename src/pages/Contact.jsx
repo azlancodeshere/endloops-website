@@ -63,7 +63,6 @@ function FaqItem({ q, a, index }) {
       </dt>
       <dd
         id={`${id}-panel`}
-        role="region"
         aria-labelledby={`${id}-btn`}
         style={{
           display: 'grid',

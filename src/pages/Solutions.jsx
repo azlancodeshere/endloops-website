@@ -41,7 +41,7 @@ export default function Solutions() {
         <div className="flex flex-wrap gap-x-8 gap-y-3">
           {['Budget review', 'Escrow audit', 'Financial audit', 'Interim audit', 'Property budgeting'].map(
             (n) => (
-              <span key={n} className="text-[0.9rem] text-ink-mute">
+              <span key={n} className="text-[0.9rem] text-ink-soft">
                 {n}
               </span>
             ),

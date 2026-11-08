@@ -1,22 +1,22 @@
 import Reveal from './Reveal'
 
-/**
- * Compact hero used on the interior pages. Sits on a tinted background so the
- * pure-white header (which carries the supplied logo) still reads as a clean
- * band above it.
- */
 export default function PageHero({ index, label, title, intro, children }) {
   return (
     <section className="relative overflow-hidden border-b border-line bg-mist">
-      {/* Soft brand wash, kept well away from the text. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-24 -top-32 h-[26rem] w-[26rem] rounded-full bg-brand/10 blur-[110px]"
+        className="pointer-events-none absolute -right-24 -top-32 h-[28rem] w-[28rem] rounded-full bg-brand/[0.09] blur-[120px]"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-8 top-24 h-64 w-64 rounded-full bg-purple/10 blur-[100px]"
+        className="pointer-events-none absolute -right-8 top-24 h-72 w-72 rounded-full bg-purple/[0.08] blur-[110px]"
       />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-16 bottom-0 h-48 w-48 rounded-full bg-blue/[0.06] blur-[90px]"
+      />
+
+      <span aria-hidden="true" className="brand-rule absolute left-0 top-0 block w-full" />
 
       <div className="shell relative py-16 md:py-24">
         <Reveal>

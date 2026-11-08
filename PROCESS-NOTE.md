@@ -36,6 +36,6 @@ endpoint instead of the mailto fallback), and cross-browser testing beyond Chrom
 
 ## Tools, AI and hours
 
-I used Cursor for editing and OpenCode (an AI coding agent) for planning, generating and
+I used Antigravity (Google DeepMind's AI coding agent) for planning, generating and
 reviewing code — plus my own passes for copy, accessibility and design. Time spent: roughly
 15–25 hours across design, build and audit.

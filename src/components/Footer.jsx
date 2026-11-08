@@ -42,6 +42,24 @@ export default function Footer() {
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-mute">
               {SITE.originLine}
             </p>
+
+            {/* Contact pill */}
+            <a
+              href={`mailto:${SITE.email}`}
+              className="mt-6 inline-flex items-center gap-2 rounded-full border border-line-strong bg-mist px-4 py-2 text-[0.88rem] text-ink-soft transition-colors hover:border-brand/40 hover:text-brand-deep"
+            >
+              <svg viewBox="0 0 16 16" className="h-3.5 w-3.5 shrink-0" aria-hidden="true">
+                <path
+                  d="M2 4h12v9H2V4zm0 0 6 5 6-5"
+                  stroke="currentColor"
+                  strokeWidth="1.4"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              {SITE.email}
+            </a>
           </div>
 
           <div className="grid gap-10 sm:grid-cols-3 lg:col-span-7">

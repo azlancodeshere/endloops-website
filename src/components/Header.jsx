@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import Logo from './Logo'
 import Button from './Button'
@@ -9,7 +9,6 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const { pathname } = useLocation()
 
-  // Always start a new page with the menu closed.
   useEffect(() => setOpen(false), [pathname])
 
   useEffect(() => {
@@ -19,7 +18,6 @@ export default function Header() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Esc closes the panel and the page behind it stops scrolling.
   useEffect(() => {
     if (!open) return
     const onKey = (e) => {
@@ -36,10 +34,10 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 bg-white transition-shadow duration-300 ${
+      className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'shadow-[0_1px_0_rgba(24,32,48,0.08),0_12px_28px_-24px_rgba(24,32,48,0.45)]'
-          : ''
+          ? 'bg-white/90 shadow-[0_1px_0_rgba(24,32,48,0.07),0_8px_32px_-20px_rgba(24,32,48,0.35)] backdrop-blur-md'
+          : 'bg-white'
       }`}
     >
       <div className="shell flex h-16 items-center justify-between gap-6 md:h-[4.5rem]">
@@ -48,7 +46,6 @@ export default function Header() {
           className="flex shrink-0 items-center"
           aria-label={`${SITE.name} — home`}
         >
-          {/* The supplied logo: white background, so it sits on a white header. */}
           <Logo className="h-7 w-auto md:h-8" eager />
         </Link>
 
@@ -60,9 +57,7 @@ export default function Header() {
                   to={item.to}
                   className={({ isActive }) =>
                     `relative rounded-full px-4 py-2 text-[0.94rem] transition-colors duration-200 ${
-                      isActive
-                        ? 'text-ink'
-                        : 'text-ink-soft hover:text-ink'
+                      isActive ? 'text-ink' : 'text-ink-soft hover:text-ink'
                     }`
                   }
                 >
@@ -84,8 +79,6 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          {/* Wrapped rather than given `hidden`, because Button's own base
-              class is `inline-flex` and would win the cascade over it. */}
           <span className="hidden sm:block">
             <Button to={SITE.demoHref} variant="primary" arrow>
               Request a demo
@@ -121,7 +114,6 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile panel */}
       <div
         id="mobile-menu"
         hidden={!open}

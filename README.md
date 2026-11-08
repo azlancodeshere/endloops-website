@@ -3,6 +3,8 @@
 A five-page marketing site for **Endloops**, the automation company spun out of the
 technology department of Alkazim, a Dubai accounting and audit firm.
 
+**Live site: https://endloops-website.vercel.app/**
+
 Built as a take-home assignment for the Full-Stack Engineering Intern (UI/UX & Product
 Design) role. React + Vite + Tailwind CSS.
 
@@ -148,7 +150,8 @@ src/
     content.js      ← all product and marketing copy (single source)
   components/       ← Header, Footer, Logo, Button, Reveal, SectionHeading,
                       PageHero, CtaBand, LoopPipeline, OfferingTabs,
-                      CapabilityList, ProcessLoop, Walkthrough, ContactForm
+                      CapabilityList, ProcessLoop, Walkthrough, ContactForm,
+                      Counter, ScrollToTop
   pages/            ← Home, Solutions, Tools, About, Contact, NotFound
   hooks/            ← usePageMeta (per-route title + description)
 ```

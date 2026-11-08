@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import PageHero from '../components/PageHero'
 import Reveal from '../components/Reveal'
 import ContactForm from '../components/ContactForm'
@@ -25,6 +26,59 @@ const FAQ = [
   },
 ]
 
+function FaqItem({ q, a, index }) {
+  const [open, setOpen] = useState(false)
+  const id = `faq-${index}`
+
+  return (
+    <div className="border-b border-line">
+      <dt>
+        <button
+          type="button"
+          id={`${id}-btn`}
+          aria-expanded={open}
+          aria-controls={`${id}-panel`}
+          onClick={() => setOpen((o) => !o)}
+          className="flex w-full items-start justify-between gap-4 py-7 text-left"
+        >
+          <span className="text-[1.05rem] font-medium leading-snug text-ink transition-colors hover:text-brand-deep">
+            {q}
+          </span>
+          <span
+            aria-hidden="true"
+            className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-line-strong text-ink-mute transition-all duration-300 ${
+              open ? 'rotate-45 border-brand text-brand' : ''
+            }`}
+          >
+            <svg viewBox="0 0 12 12" className="h-2.5 w-2.5" aria-hidden="true">
+              <path
+                d="M6 2v8M2 6h8"
+                stroke="currentColor"
+                strokeWidth="1.7"
+                strokeLinecap="round"
+              />
+            </svg>
+          </span>
+        </button>
+      </dt>
+      <dd
+        id={`${id}-panel`}
+        role="region"
+        aria-labelledby={`${id}-btn`}
+        style={{
+          display: 'grid',
+          gridTemplateRows: open ? '1fr' : '0fr',
+          transition: 'grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
+        }}
+      >
+        <div className="overflow-hidden">
+          <p className="pb-7 text-[0.98rem] leading-relaxed text-ink-soft">{a}</p>
+        </div>
+      </dd>
+    </div>
+  )
+}
+
 export default function Contact() {
   usePageMeta(
     'Talk to us',
@@ -43,7 +97,6 @@ export default function Contact() {
       <section className="bg-white py-16 md:py-24">
         <div className="shell">
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-            {/* Form */}
             <div className="lg:col-span-7">
               <Reveal>
                 <h2 className="display text-title text-ink">Request a demo</h2>
@@ -53,15 +106,11 @@ export default function Contact() {
                   are required. We do not add you to a mailing list.
                 </p>
               </Reveal>
-
               <div className="mt-9">
                 <ContactForm />
               </div>
             </div>
 
-            {/* Sidebar */}
-            {/* Not an <aside>: nested inside <main> it would create a
-                nested landmark, which is flagged as an a11y violation. */}
             <div className="lg:col-span-5">
               <Reveal delay={80}>
                 <div className="rounded-2xl border border-line bg-mist p-7 md:p-8">
@@ -73,12 +122,8 @@ export default function Contact() {
                           {i + 1}
                         </span>
                         <span>
-                          <span className="block text-[0.97rem] font-medium text-ink">
-                            {s.t}
-                          </span>
-                          <span className="mt-1 block text-[0.92rem] leading-relaxed text-ink-soft">
-                            {s.b}
-                          </span>
+                          <span className="block text-[0.97rem] font-medium text-ink">{s.t}</span>
+                          <span className="mt-1 block text-[0.92rem] leading-relaxed text-ink-soft">{s.b}</span>
                         </span>
                       </li>
                     ))}
@@ -112,15 +157,11 @@ export default function Contact() {
                     )}
                     <li>
                       <span className="block text-[0.82rem] text-ink-mute">Based in</span>
-                      <span className="mt-1 block text-[1rem] font-medium text-ink">
-                        {SITE.address}
-                      </span>
+                      <span className="mt-1 block text-[1rem] font-medium text-ink">{SITE.address}</span>
                     </li>
                     <li>
                       <span className="block text-[0.82rem] text-ink-mute">Origin</span>
-                      <span className="mt-1 block text-[0.97rem] leading-relaxed text-ink-soft">
-                        {SITE.originLine}
-                      </span>
+                      <span className="mt-1 block text-[0.97rem] leading-relaxed text-ink-soft">{SITE.originLine}</span>
                     </li>
                   </ul>
                 </div>
@@ -130,27 +171,16 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* FAQ */}
       <section className="border-t border-line bg-mist py-20 md:py-28">
         <div className="shell">
           <div className="max-w-3xl">
             <Reveal>
               <p className="eyebrow text-brand-deep">Before you ask</p>
-              <h2 className="display mt-6 text-headline text-ink">
-                Three questions we get first.
-              </h2>
+              <h2 className="display mt-6 text-headline text-ink">Three questions we get first.</h2>
             </Reveal>
-
             <dl className="mt-12 border-t border-line">
               {FAQ.map((item, i) => (
-                <Reveal key={item.q} delay={i * 70} className="border-b border-line py-7">
-                  <dt className="text-[1.05rem] font-medium leading-snug text-ink">
-                    {item.q}
-                  </dt>
-                  <dd className="mt-3 text-[0.98rem] leading-relaxed text-ink-soft">
-                    {item.a}
-                  </dd>
-                </Reveal>
+                <FaqItem key={item.q} q={item.q} a={item.a} index={i} />
               ))}
             </dl>
           </div>

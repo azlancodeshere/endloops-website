@@ -131,20 +131,11 @@ export default function ContactForm() {
           >
             Open the draft again
           </a>
-          <a
-            href={`mailto:${SITE.email}`}
-            className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-white px-6 py-3 text-[0.95rem] font-medium text-ink transition-colors hover:border-ink/40 hover:bg-mist"
-          >
-            Email {SITE.email}
-          </a>
         </div>
 
         <p className="mt-6 text-[0.85rem] text-ink-mute">
-          Nothing opened? Copy your message across and send it directly to{' '}
-          <a href={`mailto:${SITE.email}`} className="text-brand-deep underline-offset-4 hover:underline">
-            {SITE.email}
-          </a>
-          .
+          Nothing opened? Check your email app for the drafted message and press
+          send — we will come back to you within one business day.
         </p>
       </div>
     )

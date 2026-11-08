@@ -24,19 +24,18 @@ invisible.
 
 ## Verification
 
-Rather than trusting my eye, I audited the result: axe-core returns zero violations across
-six routes at 1440px and 390px, and 27 scripted checks cover the tabs, walkthrough, FAQ,
-form, menu and scroll-to-top — both committed as npm scripts. Two bugs surfaced — a cascade
-conflict in the mobile header, and a grey failing AA contrast — both fixed.
+I audited rather than trusted my eye: axe-core returns zero violations across six routes
+at 1440px and 390px, and 27 scripted checks cover the tabs, walkthrough, FAQ, form, menu
+and scroll-to-top — both committed as npm scripts. Two bugs surfaced — a cascade conflict
+in the mobile header, and a grey failing AA contrast — both fixed.
 
 ## What I would improve with more time
 
-A committed automated test suite in place of scripted checks, performance optimization (an
-SVG logo, a real form endpoint instead of the mailto fallback), and cross-browser testing
-beyond Chrome.
+A committed automated test suite, performance optimization (an SVG logo, a real form
+endpoint instead of the mailto fallback), and cross-browser testing beyond Chrome.
 
-## Tools and AI
+## Tools, AI and hours
 
-Cursor for editing; OpenCode (an AI coding agent) for planning, generating and reviewing
-code — plus my own passes for copy, accessibility and design. Roughly 15–25 hours across
-design, build and audit.
+I used Cursor for editing and OpenCode (an AI coding agent) for planning, generating and
+reviewing code — plus my own passes for copy, accessibility and design. Time spent: roughly
+15–25 hours across design, build and audit.

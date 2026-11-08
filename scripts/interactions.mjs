@@ -62,6 +62,8 @@ if (faqBtn) {
   check('faq: aria-expanded flips to true', expanded === 'true')
 }
 
+await page.$eval('form button[type="submit"]', (el) => el.scrollIntoView({ block: 'center' }))
+await new Promise((r) => setTimeout(r, 400))
 const submit = await page.$('form button[type="submit"]')
 check('form: submit button present', Boolean(submit))
 if (submit) {

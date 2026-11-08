@@ -134,15 +134,6 @@ export default function Contact() {
                 <div className="mt-6 rounded-2xl border border-line p-7 md:p-8">
                   <h2 className="eyebrow text-ink-mute">Direct</h2>
                   <ul className="mt-6 space-y-4">
-                    <li>
-                      <span className="block text-[0.82rem] text-ink-mute">Email</span>
-                      <a
-                        href={`mailto:${SITE.email}`}
-                        className="draw-underline mt-1 inline-block text-[1rem] font-medium text-ink transition-colors hover:text-brand-deep"
-                      >
-                        {SITE.email}
-                      </a>
-                    </li>
                     {SITE.phone && (
                       <li>
                         <span className="block text-[0.82rem] text-ink-mute">Phone</span>

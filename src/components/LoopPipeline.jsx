@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const STEPS = [
   { n: '01', label: 'Read documents', meta: 'Invoices, purchase orders, statements', result: '48 / 48 read' },
@@ -45,7 +45,7 @@ function prefersReduced() {
 }
 
 export default function LoopPipeline() {
-  const reduced = useRef(prefersReduced()).current
+  const reduced = prefersReduced()
   const [stage, setStage] = useState(reduced ? LAST : 0)
   const [playing, setPlaying] = useState(!reduced)
 

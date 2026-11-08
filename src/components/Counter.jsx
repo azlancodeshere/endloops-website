@@ -4,22 +4,25 @@ function easeOutExpo(t) {
   return t === 1 ? 1 : 1 - Math.pow(2, -10 * t)
 }
 
+function motionReduced() {
+  return (
+    typeof window !== 'undefined' &&
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  )
+}
+
 export default function Counter({ value, duration = 1400 }) {
   const numeric = parseInt(value, 10)
   const suffix = isNaN(numeric) ? '' : value.replace(String(numeric), '')
 
-  const [count, setCount] = useState(0)
+  const reduced = motionReduced()
+  const staticCount = reduced || typeof IntersectionObserver === 'undefined'
+  const [count, setCount] = useState(() => (staticCount ? numeric : 0))
   const [triggered, setTriggered] = useState(false)
-  const reduced =
-    typeof window !== 'undefined' &&
-    typeof window.matchMedia === 'function' &&
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
   useEffect(() => {
-    if (reduced || typeof IntersectionObserver === 'undefined') {
-      setCount(numeric)
-      return
-    }
+    if (staticCount) return
 
     const el = document.getElementById(`counter-${value}`)
     if (!el) return
@@ -35,11 +38,10 @@ export default function Counter({ value, duration = 1400 }) {
     )
     io.observe(el)
     return () => io.disconnect()
-  }, [numeric, reduced, value])
+  }, [staticCount, value])
 
   useEffect(() => {
-    if (!triggered) return
-    if (numeric === 0) { setCount(0); return }
+    if (!triggered || numeric === 0) return
 
     const start = performance.now()
     let raf

@@ -19,7 +19,7 @@ npm run build    # production bundle → dist/
 npm run preview  # serve the production build locally
 ```
 
-Node 18+ required (developed on Node 22).
+Node 20.19+ or 22.12+ required (Vite 8 requirement; developed on Node 22).
 
 ---
 
@@ -111,10 +111,11 @@ exists *and* motion is permitted, so content can never be stranded at `opacity: 
 
 ## ⚠️ Before launch
 
-1. **Contact details are placeholders.** `SITE.email` in `src/config/site.js` is set to
-   `hello@endloops.com`. It was not supplied in the brief and must be confirmed. `phone`,
-   `linkedin` and `address` are in the same file — leave `phone`/`linkedin` empty to hide
-   those rows.
+1. **The form's delivery address is a placeholder.** `SITE.email` in `src/config/site.js`
+   is set to `hello@endloops.com` — it was not supplied in the brief and must be confirmed.
+   It is used only as the contact form's internal mailto target and is **not displayed
+   anywhere on the site**. `phone`, `linkedin` and `address` are in the same file — leave
+   `phone`/`linkedin` empty to hide those rows.
 2. **The logo** is the artwork extracted from the supplied brief and is used as-is in
    `public/logo.jpg` — never recoloured, redrawn or stretched. It sits only on pure-white
    surfaces (header and footer) because the bitmap has a white background. An SVG version

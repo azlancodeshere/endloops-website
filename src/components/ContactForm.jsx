@@ -50,7 +50,7 @@ export default function ContactForm() {
   })
   const [errors, setErrors] = useState({})
   const [touched, setTouched] = useState({})
-  const [status, setStatus] = useState('idle') // idle | sending | sent
+  const [status, setStatus] = useState('idle')
   const [draftUrl, setDraftUrl] = useState('')
 
   const formRef = useRef(null)
@@ -75,7 +75,6 @@ export default function ContactForm() {
     setTouched({ name: true, email: true, interest: true, message: true })
 
     if (Object.keys(found).length > 0) {
-      // Move focus to the first field that needs attention.
       requestAnimationFrame(() => {
         formRef.current?.querySelector('[aria-invalid="true"]')?.focus()
       })
@@ -97,8 +96,6 @@ export default function ContactForm() {
       `Website enquiry — ${values.name}`,
     )}&body=${encodeURIComponent(body)}`
 
-    // No backend on this build: the visitor's mail client is the delivery path.
-    // Replace this block with a POST to your form endpoint when one exists.
     window.setTimeout(() => {
       setDraftUrl(url)
       setStatus('sent')

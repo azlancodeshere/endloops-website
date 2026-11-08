@@ -6,22 +6,21 @@ import ProcessLoop from '../components/ProcessLoop'
 import LoopPipeline from '../components/LoopPipeline'
 import CtaBand from '../components/CtaBand'
 import Button from '../components/Button'
+import Counter from '../components/Counter'
 import usePageMeta from '../hooks/usePageMeta'
 import { PROBLEMS, AUDIENCES } from '../config/content'
 
 const TRUST = [
-  {
-    k: 'Origin',
-    v: 'The technology department of Alkazim, a Dubai accounting and audit firm.',
-  },
-  {
-    k: 'Built for',
-    v: 'Accountants, auditors, finance teams and property management companies.',
-  },
-  {
-    k: 'Always',
-    v: 'The software prepares the work. A professional reviews and signs off.',
-  },
+  { k: 'Origin', v: 'The technology department of Alkazim, a Dubai accounting and audit firm.' },
+  { k: 'Built for', v: 'Accountants, auditors, finance teams and property management companies.' },
+  { k: 'Always', v: 'The software prepares the work. A professional reviews and signs off.' },
+]
+
+const STATS = [
+  { value: '5', unit: 'end-to-end', label: 'solutions' },
+  { value: '6', unit: 'standalone', label: 'tools' },
+  { value: '100s', unit: 'documents', label: 'per run' },
+  { value: '0', unit: 'auto-approvals', label: 'ever' },
 ]
 
 export default function Home() {
@@ -32,27 +31,40 @@ export default function Home() {
 
   return (
     <>
-      {/* ── Hero ─────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-white">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -left-40 -top-56 h-[34rem] w-[34rem] rounded-full bg-brand/[0.09] blur-[140px]"
+          className="pointer-events-none absolute -left-40 -top-56 h-[36rem] w-[36rem] rounded-full bg-brand/[0.08] blur-[150px]"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -right-32 top-10 h-[26rem] w-[26rem] rounded-full bg-blue/[0.07] blur-[130px]"
+          className="pointer-events-none absolute -right-32 top-10 h-[28rem] w-[28rem] rounded-full bg-blue/[0.07] blur-[140px]"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute bottom-0 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-purple/[0.05] blur-[100px]"
         />
 
         <div className="shell relative pb-10 pt-14 md:pb-14 md:pt-20">
           <Reveal className="max-w-4xl">
             <p className="eyebrow flex items-center gap-3 text-brand-deep">
-              <span aria-hidden="true" className="h-2 w-2 rounded-full bg-brand" />
+              <span aria-hidden="true" className="h-2 w-2 animate-pulse rounded-full bg-brand" />
               Automation for financial professionals
             </p>
 
             <h1 className="display mt-8 text-display text-ink">
               The busywork is handled.
-              <br className="hidden sm:block" /> The judgement is yours.
+              <br className="hidden sm:block" />{' '}
+              <span
+                style={{
+                  background: 'linear-gradient(135deg, #00a860 0%, #0e9b84 50%, #2563eb 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}
+              >
+                The judgement is yours.
+              </span>
             </h1>
           </Reveal>
 
@@ -96,15 +108,34 @@ export default function Home() {
           </div>
         </div>
 
-        {/* The visual that explains the product */}
-        <div className="shell relative pb-16 md:pb-24">
+        <div className="border-y border-line bg-mist">
+          <div className="shell">
+            <ul className="grid grid-cols-2 divide-x divide-line md:grid-cols-4">
+              {STATS.map((s, i) => (
+                <Reveal
+                  as="li"
+                  key={s.label}
+                  delay={i * 60}
+                  className="flex flex-col items-center gap-1 px-6 py-7 text-center"
+                >
+                  <span className="tnum font-display text-[2rem] font-light leading-none text-ink md:text-[2.4rem]">
+                    <Counter value={s.value} />
+                  </span>
+                  <span className="eyebrow text-brand-deep">{s.unit}</span>
+                  <span className="text-[0.8rem] text-ink-mute">{s.label}</span>
+                </Reveal>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="shell relative py-16 md:py-24">
           <Reveal delay={120}>
             <LoopPipeline />
           </Reveal>
         </div>
       </section>
 
-      {/* ── The problem ──────────────────────────────────────────── */}
       <section className="border-t border-line bg-mist py-20 md:py-28">
         <div className="shell">
           <SectionHeading
@@ -113,7 +144,6 @@ export default function Home() {
             title="Where the day actually goes."
             intro="Much of a finance professional's day is spent on tasks software can handle. The work is repetitive, it leaves room for error, and it takes attention away from judgement and away from clients."
           />
-
           <ul className="mt-14 grid gap-px overflow-hidden rounded-xl border border-line bg-line md:grid-cols-2">
             {PROBLEMS.map((item, i) => (
               <Reveal
@@ -134,7 +164,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Two offerings ────────────────────────────────────────── */}
       <section className="border-t border-line bg-white py-20 md:py-28">
         <div className="shell">
           <SectionHeading
@@ -148,14 +177,12 @@ export default function Home() {
               We will tell you plainly which ones are ready for your team.
             </p>
           </SectionHeading>
-
           <div className="mt-12">
             <OfferingTabs />
           </div>
         </div>
       </section>
 
-      {/* ── Capabilities ─────────────────────────────────────────── */}
       <section className="border-t border-line bg-mist py-20 md:py-28">
         <div className="shell">
           <SectionHeading
@@ -168,11 +195,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── The loop ─────────────────────────────────────────────── */}
-      <section
-        id="how-it-works"
-        className="border-t border-line bg-white py-20 md:py-28"
-      >
+      <section id="how-it-works" className="border-t border-line bg-white py-20 md:py-28">
         <div className="shell">
           <SectionHeading
             index="04"
@@ -184,7 +207,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Who it's for ─────────────────────────────────────────── */}
       <section className="border-t border-line bg-mist py-20 md:py-28">
         <div className="shell">
           <SectionHeading
@@ -193,7 +215,6 @@ export default function Home() {
             title="Built for people whose work has to be right."
             intro="Detailed, time-sensitive work, on deadlines that do not move. For teams like these, reliability and clarity matter as much as anything on screen."
           />
-
           <ul className="mt-14 grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
             {AUDIENCES.map((item, i) => (
               <Reveal
@@ -205,12 +226,8 @@ export default function Home() {
                 <span className="tnum eyebrow text-brand-deep">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <h3 className="mt-5 text-[1.05rem] font-medium text-ink">
-                  {item.title}
-                </h3>
-                <p className="mt-2.5 text-[0.94rem] leading-relaxed text-ink-soft">
-                  {item.body}
-                </p>
+                <h3 className="mt-5 text-[1.05rem] font-medium text-ink">{item.title}</h3>
+                <p className="mt-2.5 text-[0.94rem] leading-relaxed text-ink-soft">{item.body}</p>
               </Reveal>
             ))}
           </ul>

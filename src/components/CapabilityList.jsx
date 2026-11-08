@@ -1,7 +1,6 @@
 import Reveal from './Reveal'
 import { CAPABILITIES } from '../config/content'
 
-/** The five things the technology does, set as a numbered working-paper list. */
 export default function CapabilityList() {
   return (
     <ul className="mt-14 border-t border-line">

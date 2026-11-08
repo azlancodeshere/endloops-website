@@ -1,9 +1,5 @@
 import Reveal from './Reveal'
 
-/**
- * Section opener: mono eyebrow with a rule, display headline, optional lead.
- * The numbering is part of the editorial/working-paper visual language.
- */
 export default function SectionHeading({
   index,
   label,

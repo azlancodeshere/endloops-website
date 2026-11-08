@@ -5,13 +5,6 @@ const motionReduced = () =>
   typeof window.matchMedia === 'function' &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-/**
- * Fade-and-rise on first scroll into view.
- *
- * The `reveal` class is only applied once we know IntersectionObserver exists
- * and motion is allowed — so if either is missing the content simply renders
- * in its final state rather than being stranded at opacity 0.
- */
 export default function Reveal({
   as: Tag = 'div',
   delay = 0,

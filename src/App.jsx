@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import ScrollToTop from './components/ScrollToTop'
 import Home from './pages/Home'
 import Solutions from './pages/Solutions'
 import Tools from './pages/Tools'
@@ -9,11 +10,6 @@ import About from './pages/About'
 import Contact from './pages/Contact'
 import NotFound from './pages/NotFound'
 
-/**
- * Handles both route changes and in-page anchors.
- *  - no hash  -> return to the top
- *  - hash     -> scroll to that section (used by /solutions#budget-review etc.)
- */
 function ScrollManager() {
   const { pathname, hash } = useLocation()
 
@@ -56,6 +52,7 @@ export default function App() {
       </main>
 
       <Footer />
+      <ScrollToTop />
     </div>
   )
 }

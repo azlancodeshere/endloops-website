@@ -1,10 +1,5 @@
 import { useState } from 'react'
 
-/**
- * Interactive walkthrough for the purchase-order extraction tool — the
- * "visual that explains how one of our tools works" from the brief.
- * All figures are illustrative and labelled as such.
- */
 const STEPS = [
   { n: '01', label: 'Hand it over' },
   { n: '02', label: 'Extract' },
@@ -62,9 +57,7 @@ function Panel({ step }) {
         <div className="rounded-xl border border-line bg-mist p-5">
           <div className="mb-4 flex items-center justify-between">
             <span className="eyebrow text-ink-mute">Incoming batch</span>
-            <span className="eyebrow rounded-full bg-white px-2.5 py-1 text-brand-deep">
-              48 files
-            </span>
+            <span className="eyebrow rounded-full bg-white px-2.5 py-1 text-brand-deep">48 files</span>
           </div>
           <ul className="grid grid-cols-2 gap-2 sm:grid-cols-3">
             {FILES.map((f) => (
@@ -76,9 +69,7 @@ function Panel({ step }) {
               </li>
             ))}
           </ul>
-          <p className="mt-4 text-[0.78rem] text-ink-mute">
-            …and 36 more in the same run.
-          </p>
+          <p className="mt-4 text-[0.78rem] text-ink-mute">…and 36 more in the same run.</p>
         </div>
       </div>
     )
@@ -106,9 +97,7 @@ function Panel({ step }) {
             <span className="eyebrow text-brand-deep">7 fields</span>
           </div>
           <table className="w-full border-collapse text-left">
-            <caption className="sr-only">
-              Fields extracted from invoice INV-4480
-            </caption>
+            <caption className="sr-only">Fields extracted from invoice INV-4480</caption>
             <thead>
               <tr className="border-b border-line">
                 <th scope="col" className="eyebrow px-4 py-2.5 font-medium text-ink-mute">Field</th>
@@ -253,7 +242,6 @@ export default function Walkthrough() {
 
   return (
     <div className="overflow-hidden rounded-2xl border border-line bg-white shadow-[0_30px_60px_-50px_rgba(24,32,48,0.5)]">
-      {/* Stepper */}
       <div className="border-b border-line bg-mist px-4 py-3 md:px-6">
         <ol className="flex flex-wrap gap-x-1 gap-y-2">
           {STEPS.map((s, i) => (
@@ -282,7 +270,6 @@ export default function Walkthrough() {
         </ol>
       </div>
 
-      {/* Panel */}
       <div className="px-5 py-8 md:px-8 md:py-10">
         <div
           key={step}
@@ -292,7 +279,6 @@ export default function Walkthrough() {
         </div>
       </div>
 
-      {/* Controls */}
       <div className="flex items-center justify-between gap-4 border-t border-line px-5 py-4 md:px-8">
         <button
           type="button"

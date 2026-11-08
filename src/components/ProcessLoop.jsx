@@ -1,21 +1,16 @@
 import Reveal from './Reveal'
 import { LOOP_STEPS } from '../config/content'
 
-/**
- * The four-stage loop. Steps 1–2 are software, steps 3–4 are people, and the
- * rail changes colour at that handover to make the boundary unmistakable.
- */
 export default function ProcessLoop() {
   return (
     <div className="mt-14">
-      {/* Rail — hidden on small screens where the vertical list reads better */}
       <div aria-hidden="true" className="relative mb-10 hidden md:block">
         <div className="absolute left-0 right-0 top-[13px] h-px bg-line" />
         <div className="absolute left-0 top-[13px] h-px w-1/2 bg-linear-to-r from-brand to-teal" />
         <div className="absolute left-1/2 top-[13px] h-px w-1/2 bg-linear-to-r from-teal to-purple" />
 
         <ol className="relative grid grid-cols-4 gap-6">
-          {LOOP_STEPS.map((step, i) => (
+          {LOOP_STEPS.map((step) => (
             <li key={step.n} className="flex flex-col items-start">
               <span
                 className={`flex h-[27px] w-[27px] items-center justify-center rounded-full border-2 text-[0.62rem] font-semibold tnum ${
@@ -24,7 +19,7 @@ export default function ProcessLoop() {
                     : 'border-purple bg-white text-purple'
                 }`}
               >
-                {i + 1}
+                {step.n}
               </span>
             </li>
           ))}
@@ -40,7 +35,6 @@ export default function ProcessLoop() {
             className="relative flex flex-col"
           >
             <span className="flex items-center gap-3">
-              {/* Mobile-only node */}
               <span
                 aria-hidden="true"
                 className={`flex h-[27px] w-[27px] items-center justify-center rounded-full border-2 text-[0.62rem] font-semibold tnum md:hidden ${

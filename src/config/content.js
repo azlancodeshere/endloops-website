@@ -1,11 +1,3 @@
-/**
- * Product and marketing copy.
- *
- * All copy is written for this build from the assignment brief. It is kept in
- * one file so wording can be reviewed and adjusted without touching layouts.
- */
-
-/** End-to-end solutions: software that runs a whole process start to finish. */
 export const SOLUTIONS = [
   {
     id: 'budget-review',
@@ -68,7 +60,7 @@ export const SOLUTIONS = [
     name: 'Budget preparation for property management',
     summary: 'Service charge and property budgets built from actuals, contracts and forecasts.',
     detail:
-      'Last year’s actuals, standing contracts and known commitments are brought together into a draft budget with each assumption visible — ready for the review and owner approval that a property budget needs.',
+      "Last year's actuals, standing contracts and known commitments are brought together into a draft budget with each assumption visible — ready for the review and owner approval that a property budget needs.",
     points: [
       'Built from prior actuals, contracts and scheduled works',
       'Assumptions visible and adjustable line by line',
@@ -79,7 +71,6 @@ export const SOLUTIONS = [
   },
 ]
 
-/** Standalone tools: each solves one specific job and works on its own. */
 export const TOOLS = [
   {
     id: 'po-extraction',
@@ -167,7 +158,6 @@ export const TOOLS = [
   },
 ]
 
-/** The five things the technology does. */
 export const CAPABILITIES = [
   {
     n: '01',
@@ -201,7 +191,6 @@ export const CAPABILITIES = [
   },
 ]
 
-/** The loop: what the software does, and where a person stays involved. */
 export const LOOP_STEPS = [
   {
     n: '01',
@@ -248,7 +237,6 @@ export const AUDIENCES = [
   },
 ]
 
-/** Honest framing of the problem — no invented statistics. */
 export const PROBLEMS = [
   {
     title: 'Reading the same document twice',

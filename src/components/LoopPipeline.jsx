@@ -1,40 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 
-/**
- * An illustrative run: documents go in, the software prepares the work, and a
- * professional signs off. This is the "how one of our tools works" visual.
- *
- * Accessibility notes:
- *  - the timer only runs when `playing` is true and motion is allowed
- *  - there is an explicit pause/play control
- *  - steps are buttons, so the sequence can be driven from the keyboard
- *  - with prefers-reduced-motion the panel renders in its finished state
- */
 const STEPS = [
-  {
-    n: '01',
-    label: 'Read documents',
-    meta: 'Invoices, purchase orders, statements',
-    result: '48 / 48 read',
-  },
-  {
-    n: '02',
-    label: 'Compare and match',
-    meta: 'Against the ledger and PO register',
-    result: '45 matched · 3 differ',
-  },
-  {
-    n: '03',
-    label: 'Check against rules',
-    meta: '12 agreed controls applied',
-    result: '3 flagged',
-  },
-  {
-    n: '04',
-    label: 'Prepare drafts',
-    meta: 'Schedule and exception list',
-    result: 'Ready to review',
-  },
+  { n: '01', label: 'Read documents', meta: 'Invoices, purchase orders, statements', result: '48 / 48 read' },
+  { n: '02', label: 'Compare and match', meta: 'Against the ledger and PO register', result: '45 matched · 3 differ' },
+  { n: '03', label: 'Check against rules', meta: '12 agreed controls applied', result: '3 flagged' },
+  { n: '04', label: 'Prepare drafts', meta: 'Schedule and exception list', result: 'Ready to review' },
 ]
 
 const ROWS = [
@@ -46,7 +16,6 @@ const ROWS = [
   { id: 'INV-4495', amt: '3,275.00' },
 ]
 
-/* Status of each row at each stage of the run. */
 const ROW_STATUS = [
   ['read', 'read', 'read', 'read', 'read', 'read'],
   ['ok', 'ok', 'diff', 'ok', 'missing', 'ok'],
@@ -65,7 +34,7 @@ const STATUS_STYLE = {
 
 const STEP_MS = 2400
 const REVIEW_MS = 3200
-const LAST = STEPS.length // index of the "human review" state
+const LAST = STEPS.length
 
 function prefersReduced() {
   return (
@@ -106,7 +75,6 @@ export default function LoopPipeline() {
         className="pointer-events-none absolute -bottom-32 -left-16 h-72 w-72 rounded-full bg-blue/20 blur-[120px]"
       />
 
-      {/* ── Panel header ─────────────────────────────────────────── */}
       <div className="relative flex items-center justify-between gap-4 border-b border-white/10 px-5 py-4 md:px-7">
         <div className="flex min-w-0 items-center gap-3">
           <span className="flex gap-1.5" aria-hidden="true">
@@ -114,9 +82,7 @@ export default function LoopPipeline() {
             <span className="h-2 w-2 rounded-full bg-white/25" />
             <span className="h-2 w-2 rounded-full bg-brand" />
           </span>
-          <p className="eyebrow truncate text-white/55">
-            Run · Supplier invoices — Q3
-          </p>
+          <p className="eyebrow truncate text-white/55">Run · Supplier invoices — Q3</p>
         </div>
 
         <div className="flex items-center gap-3">
@@ -143,9 +109,7 @@ export default function LoopPipeline() {
         </div>
       </div>
 
-      {/* ── Body ─────────────────────────────────────────────────── */}
       <div className="relative grid gap-6 p-5 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] md:gap-8 md:p-7">
-        {/* Source document */}
         <figure className="min-w-0">
           <figcaption className="eyebrow mb-3 text-white/40">Source document</figcaption>
           <div className="rounded-lg border border-white/10 bg-white/[0.04] p-3.5">
@@ -167,13 +131,9 @@ export default function LoopPipeline() {
                         aria-hidden="true"
                         className={`h-1.5 w-1.5 shrink-0 rounded-full transition-colors duration-500 ${style.dot}`}
                       />
-                      <span className="tnum truncate text-[0.74rem] text-white/65">
-                        {row.id}
-                      </span>
+                      <span className="tnum truncate text-[0.74rem] text-white/65">{row.id}</span>
                     </span>
-                    <span
-                      className={`tnum shrink-0 text-[0.74rem] transition-colors duration-500 ${style.text}`}
-                    >
+                    <span className={`tnum shrink-0 text-[0.74rem] transition-colors duration-500 ${style.text}`}>
                       {row.amt}
                     </span>
                   </li>
@@ -186,7 +146,6 @@ export default function LoopPipeline() {
           </p>
         </figure>
 
-        {/* Steps */}
         <div className="min-w-0">
           <p className="eyebrow mb-3 text-white/40">What the software does</p>
           <ol className="space-y-1.5">
@@ -231,11 +190,8 @@ export default function LoopPipeline() {
                           </span>
                         </span>
 
-                        <span className="mt-1 block text-[0.78rem] text-white/40">
-                          {step.meta}
-                        </span>
+                        <span className="mt-1 block text-[0.78rem] text-white/40">{step.meta}</span>
 
-                        {/* Progress rail */}
                         <span
                           aria-hidden="true"
                           className="mt-2.5 block h-[3px] w-full overflow-hidden rounded-full bg-white/10"
@@ -261,7 +217,6 @@ export default function LoopPipeline() {
         </div>
       </div>
 
-      {/* ── Human sign-off ───────────────────────────────────────── */}
       <div
         className={`relative flex flex-col gap-4 border-t px-5 py-5 transition-colors duration-500 md:flex-row md:items-center md:justify-between md:px-7 ${
           reviewing ? 'border-brand/40 bg-brand/[0.09]' : 'border-white/10 bg-white/[0.03]'
@@ -295,18 +250,14 @@ export default function LoopPipeline() {
         <div className="flex shrink-0 gap-2">
           <span
             className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-[0.82rem] font-medium transition-all duration-500 ${
-              reviewing
-                ? 'bg-white text-ink'
-                : 'border border-white/15 text-white/35'
+              reviewing ? 'bg-white text-ink' : 'border border-white/15 text-white/35'
             }`}
           >
             Approve
           </span>
           <span
             className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-[0.82rem] font-medium transition-all duration-500 ${
-              reviewing
-                ? 'border border-white/35 text-white'
-                : 'border border-white/10 text-white/25'
+              reviewing ? 'border border-white/35 text-white' : 'border border-white/10 text-white/25'
             }`}
           >
             Adjust

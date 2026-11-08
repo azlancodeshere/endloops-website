@@ -26,17 +26,13 @@ const TABS = [
   },
 ]
 
-/**
- * Tabs distinguishing the two product types — the single most important piece
- * of messaging on the site. Implements the ARIA tabs pattern including manual
- * activation on arrow keys.
- */
 export default function OfferingTabs() {
   const [active, setActive] = useState(0)
   const tabRefs = useRef([])
   const tab = TABS[active]
 
-  const onKeyDown = (event) => {    const { key } = event
+  const onKeyDown = (event) => {
+    const { key } = event
     let next = null
     if (key === 'ArrowRight' || key === 'ArrowDown') next = (active + 1) % TABS.length
     else if (key === 'ArrowLeft' || key === 'ArrowUp')
@@ -134,8 +130,6 @@ export default function OfferingTabs() {
               </li>
             ))}
 
-            {/* An odd number of items would leave a gap in the grid, so the
-                slot becomes a route into the full list instead. */}
             {tab.items.length % 2 === 1 && (
               <li>
                 <Link
@@ -148,8 +142,7 @@ export default function OfferingTabs() {
                       {tab.items.length} in the range
                     </p>
                     <p className="mt-2.5 text-[0.93rem] leading-relaxed text-ink-soft">
-                      See what each one does, what it needs from you, and where
-                      the sign-off happens.
+                      See what each one does, what it needs from you, and where the sign-off happens.
                     </p>
                   </div>
 
